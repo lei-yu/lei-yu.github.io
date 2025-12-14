@@ -38,7 +38,7 @@ layout: default
 /* 子列表样式重置 - 移除上下间距 */
 .publications-list ol {
   list-style: none; /* 禁用默认ol编号 */
-  padding-left: 1em; /* 🔴 增加子列表整体右缩进（原0） */
+  padding-left: 1em; /* 子列表整体右缩进（可根据需要微调） */
   margin: 0 !important; /* 移除子列表上下间距 */
   font-weight: normal !important; /* 确保子列表不加粗 */
 }
@@ -49,8 +49,8 @@ layout: default
   margin: 0 !important; /* 移除分类标题上下间距 */
   font-weight: 700 !important; /* 仅分类标题加粗 */
   list-style-type: disc !important; /* 显示黑点列表符号 */
-  list-style-position: inside !important; /* 黑点在文本内（可选：outside 则黑点在左侧） */
-  padding-left: 0.2em !important; /* 🔴 缩减黑点与文本间距（原0.5em） */
+  list-style-position: inside !important; /* 黑点在文本内 */
+  padding-left: 0.05em !important; /* 🔴 大幅缩减黑点与文本间距（原0.2em） */
 }
 
 /* Notes分类：单独初始化计数器 + 显示黑点 - 移除上下间距 */
@@ -61,7 +61,7 @@ layout: default
   counter-reset: pub-counter; /* 重置计数器为0，重新开始编号 */
   list-style-type: disc !important; /* 显示黑点列表符号 */
   list-style-position: inside !important;
-  padding-left: 0.2em !important; /* 🔴 同步缩减Notes分类黑点间距 */
+  padding-left: 0.05em !important; /* 🔴 同步缩减Notes分类黑点间距（原0.2em） */
 }
 
 /* 计数项样式（论文条目）- 移除上下间距 */
@@ -69,7 +69,7 @@ layout: default
   counter-increment: pub-counter; /* 计数器递增 */
   position: relative;
   margin: 0 !important; /* 移除论文条目上下间距 */
-  padding-left: 2.5em !important; /* 🔴 增加条目整体右缩进（原2em），预留序号位置 */
+  padding-left: 2.2em !important; /* 🔴 适配序号位置，缩减文本左间距（原2.5em） */
   font-weight: normal !important; /* 确保条目内容不加粗 */
   list-style: none !important; /* 条目本身不显示黑点 */
 }
@@ -78,7 +78,7 @@ layout: default
 .pub-item::before {
   content: counter(pub-counter) ". ";
   position: absolute;
-  left: 0.5em !important; /* 🔴 序号右移（原0），靠近文本 */
+  left: 0.8em !important; /* 🔴 序号右移，缩减与文本间距（原0.5em） */
   font-weight: normal !important; /* 编号不加粗 */
   white-space: nowrap; /* 防止序号换行 */
 }
@@ -191,3 +191,4 @@ layout: default
 </div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
+
