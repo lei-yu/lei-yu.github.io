@@ -50,7 +50,7 @@ layout: default
   font-weight: 700 !important; /* 仅分类标题加粗 */
   list-style-type: disc !important; /* 显示黑点列表符号 */
   list-style-position: inside !important; /* 黑点在文本内 */
-  padding-left: 0.05em !important; /* 🔴 大幅缩减黑点与文本间距（原0.2em） */
+  padding-left: 0.01em !important; /* 🔴 大幅缩减黑点与文本间距（原0.2em） */
 }
 
 /* Notes分类：单独初始化计数器 + 显示黑点 - 移除上下间距 */
@@ -78,7 +78,7 @@ layout: default
 .pub-item::before {
   content: counter(pub-counter) ". ";
   position: absolute;
-  left: 0.8em !important; /* 🔴 序号右移，缩减与文本间距（原0.5em） */
+  left: 0.7em !important; /* 🔴 序号右移，缩减与文本间距（原0.5em） */
   font-weight: normal !important; /* 编号不加粗 */
   white-space: nowrap; /* 防止序号换行 */
 }
@@ -191,4 +191,5 @@ layout: default
 </div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
+
 
