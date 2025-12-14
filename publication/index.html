@@ -28,8 +28,8 @@ layout: default
 /* 全局计数器配置 */
 .publications-list {
   counter-reset: pub-counter; /* 初始化主计数器为0 */
-  list-style: none; /* 隐藏默认列表样式 */
-  padding-left: 2em; /* 外层缩进，适配编号显示 */
+  list-style: none; /* 隐藏外层ul默认样式（仅影响外层容器） */
+  padding-left: 2em; /* 外层缩进，适配分类标题的黑点显示 */
   margin: 0;
   font-weight: normal !important; /* 重置全局字体加粗 */
 }
@@ -42,19 +42,25 @@ layout: default
   font-weight: normal !important; /* 确保子列表不加粗 */
 }
 
-/* 分类标题（不参与计数） */
+/* 分类标题（显示黑点，不参与计数） */
 .pub-category {
   counter-increment: none !important;
   margin: 1.5em 0 0.5em 0; /* 分类标题间距调整 */
   font-weight: 700 !important; /* 仅分类标题加粗 */
+  list-style-type: disc !important; /* 显示黑点列表符号 */
+  list-style-position: inside !important; /* 黑点在文本内（可选：outside 则黑点在左侧） */
+  padding-left: 0.5em !important; /* 微调黑点与文本的间距 */
 }
 
-/* Notes分类：单独初始化计数器 */
+/* Notes分类：单独初始化计数器 + 显示黑点 */
 .pub-category-reset {
   counter-increment: none !important;
   margin: 1.5em 0 0.5em 0;
   font-weight: 700 !important;
   counter-reset: pub-counter; /* 重置计数器为0，重新开始编号 */
+  list-style-type: disc !important; /* 显示黑点列表符号 */
+  list-style-position: inside !important;
+  padding-left: 0.5em !important;
 }
 
 /* 计数项样式（论文条目） */
@@ -64,6 +70,7 @@ layout: default
   margin: 0.8em 0; /* 论文条目间距 */
   padding-left: 2em; /* 预留编号位置 */
   font-weight: normal !important; /* 确保条目内容不加粗 */
+  list-style: none !important; /* 条目本身不显示黑点 */
 }
 
 /* 显示自定义连续编号 */
