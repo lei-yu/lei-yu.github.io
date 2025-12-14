@@ -27,10 +27,11 @@ layout: default
 <style>
 /* 全局计数器配置 */
 .publications-list {
-  counter-reset: pub-counter; /* 初始化计数器为0 */
+  counter-reset: pub-counter; /* 初始化主计数器为0 */
   list-style: none; /* 隐藏默认列表样式 */
   padding-left: 2em; /* 外层缩进，适配编号显示 */
   margin: 0;
+  font-weight: normal !important; /* 重置全局字体加粗 */
 }
 
 /* 子列表样式重置 */
@@ -38,13 +39,22 @@ layout: default
   list-style: none; /* 禁用默认ol编号 */
   padding-left: 0; /* 清除子列表默认缩进 */
   margin: 0.5em 0;
+  font-weight: normal !important; /* 确保子列表不加粗 */
 }
 
 /* 分类标题（不参与计数） */
 .pub-category {
   counter-increment: none !important;
   margin: 1.5em 0 0.5em 0; /* 分类标题间距调整 */
-  font-weight: 700; /* 保持分类标题加粗 */
+  font-weight: 700 !important; /* 仅分类标题加粗 */
+}
+
+/* Notes分类：单独初始化计数器 */
+.pub-category-reset {
+  counter-increment: none !important;
+  margin: 1.5em 0 0.5em 0;
+  font-weight: 700 !important;
+  counter-reset: pub-counter; /* 重置计数器为0，重新开始编号 */
 }
 
 /* 计数项样式（论文条目） */
@@ -53,6 +63,7 @@ layout: default
   position: relative;
   margin: 0.8em 0; /* 论文条目间距 */
   padding-left: 2em; /* 预留编号位置 */
+  font-weight: normal !important; /* 确保条目内容不加粗 */
 }
 
 /* 显示自定义连续编号 */
@@ -60,7 +71,12 @@ layout: default
   content: counter(pub-counter) ". ";
   position: absolute;
   left: 0;
-  font-weight: normal; /* 编号不加粗 */
+  font-weight: normal !important; /* 编号不加粗 */
+}
+
+/* 修复strong标签导致的全局加粗问题 */
+.pub-item strong {
+  font-weight: 700 !important; /* 仅指定内容加粗，不继承 */
 }
 </style>
 
@@ -126,7 +142,7 @@ layout: default
   </li>
 
   <!-- 2. Conference Papers 分类（接续上面的编号） -->
-  <li class="pub-category">Conference Papers
+  <li class="pub-category-reset">Conference Papers
     <ol>
       <li class="pub-item"><strong>Lei Yu</strong> and Venkat Anantharam, "Sequential Channel Synthesis", ISIT 2022.</li>
       <li class="pub-item"><strong>Lei Yu</strong>, Venkat Anantharam, and Jun Chen, "Type Graphs and Small-Set Expansion," ISIT 2021. </li>
@@ -145,8 +161,8 @@ layout: default
     </ol>
   </li>
 
-  <!-- 3. Notes and Unpublished Preprints 分类（接续上面的编号） -->
-  <li class="pub-category">Notes and Unpublished Preprints
+  <!-- 3. Notes and Unpublished Preprints 分类（重新开始编号） -->
+  <li class="pub-category-reset">Notes and Unpublished Preprints
     <ol>
       <li class="pub-item"><strong>Lei Yu</strong>, "The entropy method in large deviation theory", Oct. 2022 <a rel="noreferrer noopener" href="https://arxiv.org/abs/2210.13121" target="_blank">[arxiv]</a>, updated version <a rel="noreferrer noopener" href="https://www.researchgate.net/publication/364689582_The_Entropy_Method_in_Large_Deviation_Theory" target="_blank">[RG]</a>. (Incorporated into the monograph "The Entropy Method".) </li>
       <li class="pub-item">Lei Yu and Vincent Y. F. Tan, "An Improved Linear Programming Bound on the Average Distance of a Binary Code," Oct. 2019. <a rel="noreferrer noopener" href="https://arxiv.org/abs/1910.09416" target="_blank">[arxiv]</a> <a rel="noreferrer noopener" href="https://drive.google.com/open?id=1-tvUedeqeKdrw_wH8UtxJgTa_A5fb2Dt" target="_blank">[slides]</a></li>
