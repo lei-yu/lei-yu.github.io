@@ -24,45 +24,46 @@ layout: default
 <!-- /wp:group -->
 
 <style>
-/* 全局计数器配置 - 恢复分类标题容器缩进，仅调整条目 */
+/* 全局计数器配置 - 分类标题位置不变 */
 .publications-list {
   counter-reset: pub-counter; /* 初始化主计数器为0 */
   list-style: none; /* 隐藏外层ul默认样式 */
-  padding-left: 2em; /* 恢复原始缩进，保证分类标题位置不变 */
+  padding-left: 2em; /* 保持分类标题原始缩进 */
   margin: 0;
   font-weight: normal !important; /* 重置全局字体加粗 */
   line-height: 1.4;
 }
 
-/* 子列表样式 - 仅让论文条目所在ol左移 */
+/* 子列表样式 - 论文条目容器左移 */
 .publications-list ol {
   list-style: none; /* 禁用默认ol编号 */
-  padding-left: 0.5em; /* 原1em → 0.5em，仅子列表左移 */
+  padding-left: 0 !important; /* 原0.5em → 0，子列表最大化左移 */
   margin: 0 !important; /* 移除子列表上下间距 */
   font-weight: normal !important;
 }
 
-/* 分类标题 - 完全保留原始样式，位置不变 */
+/* 分类标题 - 仅缩小黑点尺寸，位置不变 */
 .pub-category {
   counter-increment: none !important;
   margin: 0 !important;
   font-weight: 700 !important;
   list-style: none !important;
   position: relative;
-  padding-left: 1.2em !important; /* 恢复原始间距，保证分类标题位置不变 */
+  padding-left: 1.2em !important; /* 保持分类标题与黑点的间距 */
 }
+/* 自定义黑点 - 缩小尺寸（原0.4em → 0.3em） */
 .pub-category::before {
   content: "";
   position: absolute;
   left: 0 !important;
   top: 0.5em;
-  width: 0.4em;
-  height: 0.4em;
+  width: 0.3em !important; /* 黑点宽度缩小 */
+  height: 0.3em !important; /* 黑点高度缩小 */
   border-radius: 50%;
   background: #000;
 }
 
-/* Notes分类标题 - 同步保留原始样式 */
+/* Notes分类标题 - 同步缩小黑点 */
 .pub-category-reset {
   counter-increment: none !important;
   margin: 0 !important;
@@ -70,25 +71,25 @@ layout: default
   counter-reset: pub-counter;
   list-style: none !important;
   position: relative;
-  padding-left: 1.2em !important; /* 恢复原始间距，位置不变 */
+  padding-left: 1.2em !important; /* 位置不变 */
 }
 .pub-category-reset::before {
   content: "";
   position: absolute;
   left: 0 !important;
   top: 0.5em;
-  width: 0.4em;
-  height: 0.4em;
+  width: 0.3em !important; /* 黑点缩小 */
+  height: 0.3em !important; /* 黑点缩小 */
   border-radius: 50%;
   background: #000;
 }
 
-/* 论文条目 - 核心调整：仅让带序号的条目左移 */
+/* 论文条目 - 核心左移调整 */
 .pub-item {
   counter-increment: pub-counter;
   position: relative;
   margin: 0 !important;
-  padding-left: 1.8em !important; /* 原2.2em → 1.8em，条目左移 */
+  padding-left: 1.6em !important; /* 原1.8em → 1.6em，进一步左移 */
   font-weight: normal !important;
   list-style: none !important;
 }
@@ -98,11 +99,11 @@ layout: default
   content: counter(pub-counter) ". ";
   position: absolute;
   left: 0 !important;
-  width: 1.6em !important; /* 原2em → 1.6em，适配条目缩进 */
+  width: 1.4em !important; /* 原1.6em → 1.4em，适配条目缩进 */
   text-align: right !important;
   font-weight: normal !important;
   white-space: nowrap;
-  padding-right: 0.1em !important; /* 缩小序号与文本间距 */
+  padding-right: 0.1em !important;
 }
 
 /* 修复strong标签加粗问题 */
@@ -213,5 +214,6 @@ layout: default
 </div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
+
 
 
