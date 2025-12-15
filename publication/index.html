@@ -24,92 +24,90 @@ layout: default
 <!-- /wp:group -->
 
 <style>
-/* 全局计数器配置 - 核心：缩小外层左缩进实现整体左移 */
+/* 全局计数器配置 - 恢复分类标题容器缩进，仅调整条目 */
 .publications-list {
   counter-reset: pub-counter; /* 初始化主计数器为0 */
-  list-style: none; /* 隐藏外层ul默认样式（仅影响外层容器） */
-  padding-left: 1em; /* 原2em → 1em，外层整体左移1em */
+  list-style: none; /* 隐藏外层ul默认样式 */
+  padding-left: 2em; /* 恢复原始缩进，保证分类标题位置不变 */
   margin: 0;
   font-weight: normal !important; /* 重置全局字体加粗 */
-  line-height: 1.4; /* 可选：统一行高，提升可读性 */
+  line-height: 1.4;
 }
 
-/* 子列表样式重置 - 移除上下间距 */
+/* 子列表样式 - 仅让论文条目所在ol左移 */
 .publications-list ol {
   list-style: none; /* 禁用默认ol编号 */
-  padding-left: 0.5em; /* 原1em → 0.5em，子列表进一步左移 */
+  padding-left: 0.5em; /* 原1em → 0.5em，仅子列表左移 */
   margin: 0 !important; /* 移除子列表上下间距 */
-  font-weight: normal !important; /* 确保子列表不加粗 */
+  font-weight: normal !important;
 }
 
-/* 分类标题（自定义黑点，不参与计数）- 微调黑点与文本间距 */
+/* 分类标题 - 完全保留原始样式，位置不变 */
 .pub-category {
   counter-increment: none !important;
-  margin: 0 !important; /* 移除分类标题上下间距 */
-  font-weight: 700 !important; /* 仅分类标题加粗 */
-  list-style: none !important; /* 隐藏原生黑点 */
-  position: relative; /* 为伪元素定位 */
-  padding-left: 1em !important; /* 原1.2em → 1em，缩小黑点与文本间距 */
+  margin: 0 !important;
+  font-weight: 700 !important;
+  list-style: none !important;
+  position: relative;
+  padding-left: 1.2em !important; /* 恢复原始间距，保证分类标题位置不变 */
 }
-/* 自定义分类标题黑点 */
 .pub-category::before {
   content: "";
   position: absolute;
-  left: 0 !important; /* 黑点左侧对齐 */
-  top: 0.5em; /* 黑点垂直居中（适配行高） */
-  width: 0.4em; /* 黑点大小 */
-  height: 0.4em; /* 黑点大小 */
-  border-radius: 50%; /* 圆形黑点 */
-  background: #000; /* 黑点颜色（可改为#333等） */
+  left: 0 !important;
+  top: 0.5em;
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: 50%;
+  background: #000;
 }
 
-/* Notes分类：单独初始化计数器 + 自定义黑点 - 同步微调 */
+/* Notes分类标题 - 同步保留原始样式 */
 .pub-category-reset {
   counter-increment: none !important;
-  margin: 0 !important; /* 移除分类标题上下间距 */
+  margin: 0 !important;
   font-weight: 700 !important;
-  counter-reset: pub-counter; /* 重置计数器为0，重新开始编号 */
-  list-style: none !important; /* 隐藏原生黑点 */
-  position: relative; /* 为伪元素定位 */
-  padding-left: 1em !important; /* 原1.2em → 1em，缩小黑点与文本间距 */
+  counter-reset: pub-counter;
+  list-style: none !important;
+  position: relative;
+  padding-left: 1.2em !important; /* 恢复原始间距，位置不变 */
 }
-/* 自定义重置分类标题黑点 */
 .pub-category-reset::before {
   content: "";
   position: absolute;
-  left: 0 !important; /* 黑点左侧对齐 */
-  top: 0.5em; /* 黑点垂直居中 */
-  width: 0.4em; /* 黑点大小 */
-  height: 0.4em; /* 黑点大小 */
-  border-radius: 50%; /* 圆形黑点 */
-  background: #000; /* 黑点颜色 */
+  left: 0 !important;
+  top: 0.5em;
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: 50%;
+  background: #000;
 }
 
-/* 计数项样式（论文条目）- 微调序号与文本间距 */
+/* 论文条目 - 核心调整：仅让带序号的条目左移 */
 .pub-item {
-  counter-increment: pub-counter; /* 计数器递增 */
+  counter-increment: pub-counter;
   position: relative;
-  margin: 0 !important; /* 移除论文条目上下间距 */
-  padding-left: 1.8em !important; /* 原2.2em → 1.8em，条目文本左移 */
-  font-weight: normal !important; /* 确保条目内容不加粗 */
-  list-style: none !important; /* 条目本身不显示黑点 */
+  margin: 0 !important;
+  padding-left: 1.8em !important; /* 原2.2em → 1.8em，条目左移 */
+  font-weight: normal !important;
+  list-style: none !important;
 }
 
-/* 显示自定义连续编号 - 右对齐调整 */
+/* 序号样式 - 适配条目左移后的对齐 */
 .pub-item::before {
   content: counter(pub-counter) ". ";
   position: absolute;
-  left: 0 !important; /* 固定左侧起始位置 */
-  width: 1.6em !important; /* 原2em → 1.6em，适配缩小后的padding */
-  text-align: right !important; /* 序号右对齐 */
-  font-weight: normal !important; /* 编号不加粗 */
-  white-space: nowrap; /* 防止序号换行 */
-  padding-right: 0.1em; /* 原0.2em → 0.1em，缩小序号与文本间距 */
+  left: 0 !important;
+  width: 1.6em !important; /* 原2em → 1.6em，适配条目缩进 */
+  text-align: right !important;
+  font-weight: normal !important;
+  white-space: nowrap;
+  padding-right: 0.1em !important; /* 缩小序号与文本间距 */
 }
 
-/* 修复strong标签导致的全局加粗问题 */
+/* 修复strong标签加粗问题 */
 .pub-item strong {
-  font-weight: 700 !important; /* 仅指定内容加粗，不继承 */
+  font-weight: 700 !important;
 }
 </style>
 
@@ -215,4 +213,5 @@ layout: default
 </div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
+
 
