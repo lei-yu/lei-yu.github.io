@@ -24,6 +24,7 @@ layout: default
 <!-- /wp:group -->
 
 <!-- 新增：添加连续编号所需的CSS样式 -->
+<!-- 替换原有<style>标签内的全部内容 -->
 <style>
 /* 全局计数器配置 */
 .publications-list {
@@ -43,25 +44,47 @@ layout: default
   font-weight: normal !important; /* 确保子列表不加粗 */
 }
 
-/* 分类标题（显示黑点，不参与计数）- 移除上下间距 */
+/* 分类标题（自定义黑点，不参与计数）- 精准控制间距 */
 .pub-category {
   counter-increment: none !important;
   margin: 0 !important; /* 移除分类标题上下间距 */
   font-weight: 700 !important; /* 仅分类标题加粗 */
-  list-style-type: disc !important; /* 显示黑点列表符号 */
-  list-style-position: inside !important; /* 黑点在文本内 */
-  padding-left: 0.01em !important; /* 🔴 大幅缩减黑点与文本间距（原0.2em） */
+  list-style: none !important; /* 隐藏原生黑点 */
+  position: relative; /* 为伪元素定位 */
+  padding-left: 1.2em !important; /* 自定义黑点与文本的间距（核心调整） */
+}
+/* 自定义分类标题黑点 */
+.pub-category::before {
+  content: "";
+  position: absolute;
+  left: 0 !important; /* 黑点左侧对齐 */
+  top: 0.5em; /* 黑点垂直居中（适配行高） */
+  width: 0.4em; /* 黑点大小 */
+  height: 0.4em; /* 黑点大小 */
+  border-radius: 50%; /* 圆形黑点 */
+  background: #000; /* 黑点颜色（可改为#333等） */
 }
 
-/* Notes分类：单独初始化计数器 + 显示黑点 - 移除上下间距 */
+/* Notes分类：单独初始化计数器 + 自定义黑点 - 精准控制间距 */
 .pub-category-reset {
   counter-increment: none !important;
   margin: 0 !important; /* 移除分类标题上下间距 */
   font-weight: 700 !important;
   counter-reset: pub-counter; /* 重置计数器为0，重新开始编号 */
-  list-style-type: disc !important; /* 显示黑点列表符号 */
-  list-style-position: inside !important;
-  padding-left: 0.05em !important; /* 🔴 同步缩减Notes分类黑点间距（原0.2em） */
+  list-style: none !important; /* 隐藏原生黑点 */
+  position: relative; /* 为伪元素定位 */
+  padding-left: 1.2em !important; /* 自定义黑点与文本的间距（核心调整） */
+}
+/* 自定义重置分类标题黑点 */
+.pub-category-reset::before {
+  content: "";
+  position: absolute;
+  left: 0 !important; /* 黑点左侧对齐 */
+  top: 0.5em; /* 黑点垂直居中 */
+  width: 0.4em; /* 黑点大小 */
+  height: 0.4em; /* 黑点大小 */
+  border-radius: 50%; /* 圆形黑点 */
+  background: #000; /* 黑点颜色 */
 }
 
 /* 计数项样式（论文条目）- 移除上下间距 */
@@ -69,18 +92,21 @@ layout: default
   counter-increment: pub-counter; /* 计数器递增 */
   position: relative;
   margin: 0 !important; /* 移除论文条目上下间距 */
-  padding-left: 2.2em !important; /* 🔴 适配序号位置，缩减文本左间距（原2.5em） */
+  padding-left: 2.2em !important; /* 适配序号位置，缩减文本左间距 */
   font-weight: normal !important; /* 确保条目内容不加粗 */
   list-style: none !important; /* 条目本身不显示黑点 */
 }
 
-/* 显示自定义连续编号 */
+/* 显示自定义连续编号 - 右对齐调整 */
 .pub-item::before {
   content: counter(pub-counter) ". ";
   position: absolute;
-  left: 0.7em !important; /* 🔴 序号右移，缩减与文本间距（原0.5em） */
+  left: 0 !important; /* 固定左侧起始位置 */
+  width: 2em !important; /* 预留足够宽度给序号（适配1-99的数字） */
+  text-align: right !important; /* 序号右对齐 */
   font-weight: normal !important; /* 编号不加粗 */
   white-space: nowrap; /* 防止序号换行 */
+  padding-right: 0.2em; /* 序号与文本之间的小间距 */
 }
 
 /* 修复strong标签导致的全局加粗问题 */
@@ -191,10 +217,3 @@ layout: default
 </div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
-
-
-
-
-
-
-
