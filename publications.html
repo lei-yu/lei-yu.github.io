@@ -71,16 +71,16 @@
   position: relative;
   padding-left: 1.2em !important; /* 保持分类标题与黑点的间距 */
 }
-/* 自定义黑点 - 缩小尺寸（原0.4em → 0.3em） */
+/* 自定义黑点 - 改为黑正方形（原0.4em → 0.3em） */
 .pub-category::before {
   content: "";
   position: absolute;
   left: 0 !important;
   top: 0.5em;
-  width: 0.3em !important; /* 黑点宽度缩小 */
-  height: 0.3em !important; /* 黑点高度缩小 */
-  border-radius: 50%;
-  background: #000;
+  width: 0.3em !important; /* 正方形宽度 */
+  height: 0.3em !important; /* 正方形高度 */
+  border-radius: 0 !important; /* 移除圆角，改为正方形 */
+  background: #000; /* 黑色背景 */
 }
 
 /* Notes分类标题 - 同步缩小黑点 */
